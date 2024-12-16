@@ -1,0 +1,13 @@
+name: My pipeline
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - api-spec.yml
+jobs:
+  my_first_job:
+    name: My first job
+    runs-on: serlf-hosted
+    steps:
+    - run: echo Hello world!
