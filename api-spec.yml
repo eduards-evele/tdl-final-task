@@ -1,0 +1,73 @@
+openapi: 3.0.0
+info:
+  title: Messages API
+  version: "1.0.0"
+paths:
+  /messages:
+    get:
+      summary: Retrieve messages
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: |
+                Hello World!
+                Hello Other World
+
+  /messages/{id}:
+    get:
+      summary: Retrieve a specific message by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the message
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: Hello World!
+
+    delete:
+      summary: Delete a specific message by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the message to delete
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+
+  /messages/{id}.json:
+    get:
+      summary: Retrieve a specific message by ID in JSON format
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the message
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              example:
+                message: Hello World!
