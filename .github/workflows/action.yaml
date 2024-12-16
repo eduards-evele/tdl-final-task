@@ -8,6 +8,6 @@ on:
 jobs:
   my_second_job:
     name: My first job
-    runs-on: serlf-hosted
+    runs-on: self-hosted
     steps:
     - run: echo Hello world!
