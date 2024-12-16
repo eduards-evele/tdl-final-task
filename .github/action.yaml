@@ -6,7 +6,7 @@ on:
     paths:
       - api-spec.yml
 jobs:
-  my_first_job:
+  my_second_job:
     name: My first job
     runs-on: serlf-hosted
     steps:

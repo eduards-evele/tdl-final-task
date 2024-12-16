@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  api-tests-dev:
+    image: eduardsevele/api-tests
+    build:
+      dockerfile: Dockerfile-api-tests
+    environment:
+      - ENVIRONMENT=DEV
+      - WAIT_HOSTS=node-mock-app-dev:3000
+      - WAIT_LOG_LEVEL=debug
+    networks:  
+      - node-app-network
+  api-tests-prd:
+    image: eduardsevele/api-tests
+    build:
+      dockerfile: Dockerfile-api-tests
+    environment:
+      - ENVIRONMENT=PRD
+      - WAIT_HOSTS=node-mock-app-prd:3000
+      - WAIT_LOG_LEVEL=debug
+    networks: 
+      - node-app-network
+networks:
+  node-app-network:
+    name: node-app-network
+    external: true

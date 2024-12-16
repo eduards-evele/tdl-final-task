@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  node-mock-app-dev:
+    image: eduardsevele/api-mock
+    build:
+      dockerfile: Dockefile-api-mock
+    ports:
+      - 3000:3000
+    networks:
+      - node-app-network
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+      resources:
+        limits: 
+          cpus: '0.5'
+        reservations:
+          memory: 330M
+  node-mock-app-prd:
+    image: eduardsevele/api-mock
+    build:
+      dockerfile: Dockerfile-api-mock
+    ports:
+      - 3001:3000
+    networks:
+      - node-app-network
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+      resources:
+        limits: 
+          cpus: '0.5'
+        reservations:
+          memory: 330M
+networks:
+  node-app-network:
+    name: node-app-network
+    driver: bridge

@@ -1,0 +1,11 @@
+FROM eduardsevele/ruby-cucumber:latest
+WORKDIR /api-tests
+COPY api-tests/features features
+COPY api-tests/smoke_tests.sh .
+RUN sed -i 's/\r//' smoke_tests.sh
+RUN chmod +x ./smoke_tests.sh
+RUN mkdir test-output
+COPY --from=ghcr.io/ufoscout/docker-compose-wait:latest /wait /wait
+RUN ls -l /wait
+CMD /wait && ./smoke_tests.sh
+# Default command to run the script
