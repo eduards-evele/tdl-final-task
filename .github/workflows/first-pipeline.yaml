@@ -18,7 +18,7 @@ jobs:
       uses: ./.github/actions/build
       with:
           application: node-mock-app
-          docker_image_tag: eduardsevele/node-mock-app:$GITHUB_SHA
+          docker_image_tag: eduardsevele/node-mock-app:${{github.sha}}
   deploy-dev:
     name: Deploy dev version of node-mock-app
     runs-on: self-hosted
@@ -31,7 +31,7 @@ jobs:
         uses: ./.github/actions/deploy
         with:
             application: node-mock-app
-            docker_image_tag: eduardsevele/node-mock-app:$GITHUB_SHA
+            docker_image_tag: eduardsevele/node-mock-app:${{github.sha}}
             type: dev
   test-dev:
     name: Start tests for dev
