@@ -9,6 +9,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - api-tests/features/**
+      - ruby-cucumber/Gemfile
 
 jobs:
   rebuild-base:
