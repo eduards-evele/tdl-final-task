@@ -45,8 +45,7 @@ jobs:
           filters: |
             features:
               - 'api-tests/features'
-      - name: Build API tests image
-        if: steps.changes.outputs.features == 'true'
+        - if: steps.changes.outputs.features == 'true'
         uses: ./.github/actions/build
         with:
           application: api-tests
@@ -56,10 +55,8 @@ jobs:
     name: Rebuild only api-tests image, without rebuilding base image
     runs-on: self-hosted
     steps:
-      - name: Checkout code
       - uses: actions/checkout@v4
       - if: github.event_name == 'workflow_dispatch'
-      - run: echo Rebuilding api-tests image with new base image
         uses: ./.github/actions/build
         with:
           application: api-tests
