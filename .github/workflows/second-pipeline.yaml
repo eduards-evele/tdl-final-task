@@ -37,8 +37,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v4
-      - run: echo "Rebuilding api-tests image with new base image"
+      - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
         id: changes
         with:
