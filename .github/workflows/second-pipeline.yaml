@@ -56,16 +56,10 @@ jobs:
     name: Rebuild only api-tests image, without rebuilding base image
     runs-on: self-hosted
     steps:
+      - if: github.event_name == 'workflow_dispatch'
       - name: Checkout the code
         uses: actions/checkout@v4
       - run: echo Rebuilding api-tests image with new base image
-      - uses: dorny/paths-filter@v3
-        id: changes
-        with:
-          filters: |
-            features:
-              - 'api-tests/features'
-      - if: github.event_name == 'workflow_dispatch'
         uses: ./.github/actions/build
         with:
           application: api-tests
