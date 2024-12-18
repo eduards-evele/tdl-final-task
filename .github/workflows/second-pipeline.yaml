@@ -15,8 +15,7 @@ jobs:
     name: Rebuild ruby base image
     runs-on: self-hosted
     steps:
-      - name: Checkout the code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
         id: changes
         with:
@@ -24,7 +23,6 @@ jobs:
             gemfile:
               - 'ruby-cucumber/Gemfile'
       - if: github.event_name == 'push' && steps.filter.gemfile == 'true' || github.event_name == 'workflow_dispatch' && github.event.inputs.skip-base == 'false'
-        name: Build image
         uses: ./.github/actions/build
         with:
             application: ruby-cucumber
@@ -36,7 +34,6 @@ jobs:
     needs: [rebuild-base]
     runs-on: self-hosted
     steps:
-      - name: Checkout the code
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
         id: changes
