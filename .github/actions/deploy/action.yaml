@@ -14,8 +14,8 @@ runs:
   using: "composite"
   steps:
     - name: Create deployment
-      run: kubectl create -f k8s/${{inputs.application}}/${{inputs.type}}/deployment.yaml
+      run: kubectl apply-f k8s/${{inputs.application}}/${{inputs.type}}/deployment.yaml
       shell: cmd
     - name: Create service
-      run: kubectl create -f k8s/${{inputs.application}}/${{inputs.type}}/service.yaml
+      run: kubectl apply -f k8s/${{inputs.application}}/${{inputs.type}}/service.yaml
       shell: cmd
