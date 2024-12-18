@@ -17,7 +17,7 @@ spec:
       containers:
       - name: api-tests-prd
         image: eduardsevele/api-tests:latest
-      env:
-      - name: ENVIRONMENT
-        value: PRD
+        env:
+          - name: ENVIRONMENT
+            value: PRD
     

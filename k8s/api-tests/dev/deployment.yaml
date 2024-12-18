@@ -17,7 +17,7 @@ spec:
       containers:
       - name: api-tests-dev
         image: eduardsevele/api-tests:latest
-      env:
-      - name: ENVIRONMENT
-        value: DEV
+        env:
+          - name: ENVIRONMENT
+            value: DEV
     
