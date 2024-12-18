@@ -44,7 +44,7 @@ jobs:
           filters: |
             features:
               - 'api-tests/features'
-        - if: steps.changes.outputs.features == 'true'
+      - if: steps.changes.outputs.features == 'true'
         uses: ./.github/actions/build
         with:
           application: api-tests
