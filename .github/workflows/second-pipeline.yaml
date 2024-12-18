@@ -52,7 +52,7 @@ jobs:
           application: api-tests
           docker_image_tag: eduardsevele/api-tests:${{github.sha}}
 
-   rebuild-test-api-only:
+  rebuild-test-api-only:
     name: Rebuild only api-tests image, without rebuilding base image
     runs-on: self-hosted
     steps:
