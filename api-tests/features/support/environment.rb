@@ -11,9 +11,9 @@ class Environment
 
     case env_name
     when 'DEV'
-      parameters[:api_host] = "http://node-mock-app-dev:3000"
+      parameters[:api_host] = "http://node-mock-app-dev-service:3000"
     when 'PRD'
-      parameters[:api_host] = "http://node-mock-app-prd:3000"
+      parameters[:api_host] = "http://node-mock-app-prd-service:3000"
     else
       #   nothing
     end
