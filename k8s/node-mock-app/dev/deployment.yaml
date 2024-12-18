@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: node-mock-app-dev
-          image: eduardsevele/node-mock-app:latest
-          ports:
-            - containerPort: 3000
+        image: eduardsevele/node-mock-app:latest
+        ports:
+          - containerPort: 3000
