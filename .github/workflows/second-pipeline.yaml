@@ -1,0 +1,71 @@
+name: API tests pipeline
+on:
+  workflow_dispatch:
+    inputs:
+        skip-base:
+          description: 'If job is triggered manually, rebuild only api-tests'
+          required: false
+          default: ''
+  push:
+    branches:
+      - main
+
+jobs:
+  rebuild-base:
+    name: Rebuild ruby base image
+    runs-on: self-hosted
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v4
+    - uses: dorny/paths-filter@v3
+      id: changes
+      with:
+        filters: |
+          gemfile:
+            - 'ruby-cucumber/Gemfile'
+    - if: github.event_name == 'push' && steps.filter.gemfile == 'true' || github.event_name == 'workflow_dispatch' && github.event.inputs.skip-base == 'false'
+      name: Build image
+      uses: ./.github/actions/build
+      with:
+          application: ruby-cucumber
+          docker_image_tag: eduardsevele/ruby-cucumber:${{github.sha}}
+
+  rebuild-test-api:
+    name: Rebuild api-tests image
+    needs: [rebuild-base]
+    runs-on: self-hosted
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+      - run: echo Rebuilding api-tests image with new base image
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            features:
+              - 'api-tests/features'
+      - if: steps.filter.features== 'true'
+      uses: ./.github/actions/build
+      with:
+        application: api-tests
+        docker_image_tag: eduardsevele/api-tests:${{github.sha}}
+
+   rebuild-test-api-only:
+    name: Rebuild only api-tests image, without rebuilding base image
+    runs-on: self-hosted
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+      - run: echo Rebuilding api-tests image with new base image
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            features:
+              - 'api-tests/features'
+      - if: steps.filter.features== 'true' && github.event_name == 'workflow_dispatch'
+      uses: ./.github/actions/build
+      with:
+        application: api-tests
+        docker_image_tag: eduardsevele/api-tests:${{github.sha}}
+
