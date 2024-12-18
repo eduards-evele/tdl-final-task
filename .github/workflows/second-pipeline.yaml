@@ -66,8 +66,8 @@ jobs:
             features:
               - 'api-tests/features'
       - if: steps.filter.features== 'true' && github.event_name == 'workflow_dispatch'
-      uses: ./.github/actions/build
-      with:
-        application: api-tests
-        docker_image_tag: eduardsevele/api-tests:${{github.sha}}
+        uses: ./.github/actions/build
+        with:
+          application: api-tests
+          docker_image_tag: eduardsevele/api-tests:${{github.sha}}
 
