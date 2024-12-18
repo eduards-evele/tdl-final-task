@@ -16,7 +16,7 @@ jobs:
     - run: echo Building new node-mock-app image
     - name: Build image
       uses: ./.github/actions/build
-        with:
+      with:
           application: node-mock-app
           docker_image_tag: eduardsevele/node-mock-app:$GITHUB_SHA
   deploy-dev:
