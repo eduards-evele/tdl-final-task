@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - api-spec.yaml
+      - node-mock-app/api-spec.yaml
 jobs:
   build:
     name: Build new node-mock-app image
