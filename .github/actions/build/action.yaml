@@ -1,0 +1,16 @@
+name: 'Build and push docker image'
+description: 'Simle composite action for building and pushing docker images'
+inputs:
+  application:
+    descrption: 'Application for which docker image should be build'
+    required: true
+  docker_image_tag: 
+    description: 'Tag how image should be tagged'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Build docker image
+      run: docker build -t ${{ inputs.docker_image_tag}} ./${{ inputs.application }}  
+    - name: Push docker image
+      run: docker push ${{ inputs.docker_image_tag}}

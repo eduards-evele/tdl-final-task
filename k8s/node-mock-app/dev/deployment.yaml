@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-mock-app-dev-deployment
+  labels:
+    app: node-mock-app-dev
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: node-mock-app-dev
+  template:
+    metadata:
+      labels:
+        app: node-mock-app-dev
+    spec:
+      containers:
+      - name: node-mock-app-dev
+        image: eduardsevele/node-mock-app:latest
+        ports:
+        - containerPort: 3000

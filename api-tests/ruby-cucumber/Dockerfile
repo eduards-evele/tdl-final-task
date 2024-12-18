@@ -1,6 +1,6 @@
 FROM ruby:2.7-alpine
 WORKDIR /api-tests
 RUN apk add --update build-base mariadb-dev nodejs tzdata openjdk8-jre && rm -rf var/cache/apk/*
-COPY api-tests/Gemfile .
+COPY Gemfile .
 RUN gem install bundler -v 2.4.22
 RUN bundle install

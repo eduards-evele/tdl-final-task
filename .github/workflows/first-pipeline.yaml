@@ -1,0 +1,79 @@
+name: Node mock app pipeline
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - api-spec.yaml
+jobs:
+  build:
+    name: Build new node-mock-app image
+    runs-on: self-hosted
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v4
+    - run: echo Building new node-mock-app image
+    - name: Build image
+      uses: ./.github/actions/build
+        with:
+          application: node-mock-app
+          docker_image_tag: eduardsevele/node-mock-app:$GITHUB_SHA
+  deploy-dev:
+    name: Deploy dev version of node-mock-app
+    runs-on: self-hosted
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+      - run: echo Deploying node-mock-app-dev
+      - name: Deploy dev
+        uses:
+          ./.github/actions/deploy
+          with:
+            application: node-mock-app
+            docker_image_tag: eduardsevele/node-mock-app:$GITHUB_SHA
+            type: dev
+  test-dev:
+    name: Start tests for dev
+    runs-on: self-hosted
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+      - run: echo Deploying node-mock-app-dev
+      - name: Start api-tests-dev
+        uses:
+          ./.github/actions/deploy
+          with:
+            application: api-tests
+            docker_image_tag: eduardsevele/api-tests:$GITHUB_SHA
+            type: dev
+  deploy-prd:
+    name: Deployprd version of node-mock-app
+    runs-on: self-hosted
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+      - run: echo Deploying node-mock-app-dev
+      - name: Deploy prd
+        uses:
+          ./.github/actions/deploy
+          with:
+            application: node-mock-app
+            docker_image_tag: eduardsevele/node-mock-app:$GITHUB_SHA
+            type: prd
+  test-prd:
+    name: Start tests for prd
+    runs-on: self-hosted
+    steps:
+      - run: echo Deploying node-mock-app-dev
+      - name: Checkout the code
+        uses: actions/checkout@v4
+      - name: Start api-tests-dev
+        uses:
+          ./.github/actions/deploy
+          with:
+            application: api-tests
+            docker_image_tag: eduardsevele/api-tests:$GITHUB_SHA
+            type: prd
+        
+  

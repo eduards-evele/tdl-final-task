@@ -1,3 +1,3 @@
 FROM mtararujs/api-mock
 WORKDIR /usr/src/app
-COPY api-spec.yml .
+COPY api-spec.yaml .
