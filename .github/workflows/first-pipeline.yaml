@@ -22,6 +22,7 @@ jobs:
   deploy-dev:
     name: Deploy dev version of node-mock-app
     runs-on: self-hosted
+    needs: [build]
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
@@ -36,6 +37,7 @@ jobs:
   test-dev:
     name: Start tests for dev
     runs-on: self-hosted
+    needs: [deploy-dev]
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
@@ -45,11 +47,12 @@ jobs:
           ./.github/actions/deploy
           with:
             application: api-tests
-            docker_image_tag: eduardsevele/api-tests:$GITHUB_SHA
+            docker_image_tag: eduardsevele/api-tests:latest
             type: dev
   deploy-prd:
     name: Deployprd version of node-mock-app
     runs-on: self-hosted
+    needs: [build]
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
@@ -59,11 +62,12 @@ jobs:
           ./.github/actions/deploy
           with:
             application: node-mock-app
-            docker_image_tag: eduardsevele/node-mock-app:$GITHUB_SHA
+            docker_image_tag: eduardsevele/node-mock-app:latest
             type: prd
   test-prd:
     name: Start tests for prd
     runs-on: self-hosted
+    needs: [deploy-prd]
     steps:
       - run: echo Deploying node-mock-app-dev
       - name: Checkout the code
@@ -73,7 +77,7 @@ jobs:
           ./.github/actions/deploy
           with:
             application: api-tests
-            docker_image_tag: eduardsevele/api-tests:$GITHUB_SHA
+            docker_image_tag: eduardsevele/api-tests:latest
             type: prd
         
   

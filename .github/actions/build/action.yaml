@@ -7,10 +7,15 @@ inputs:
   docker_image_tag: 
     description: 'Tag how image should be tagged'
     required: true
+
 runs:
   using: "composite"
   steps:
     - name: Build docker image
-      run: docker build -t ${{ inputs.docker_image_tag}} ./${{ inputs.application }}  
+      run: docker build -t ${{ inputs.docker_image_tag}} ./${{ inputs.application }}
+    - name: Build docker image with lates tag
+      run: docker build -t eduardsevele/${{inputs.application}}:latest ./${{inputs.application}}
     - name: Push docker image
       run: docker push ${{ inputs.docker_image_tag}}
+    - name: Push with latest tag
+      run: docker push eduards-evele/${{iputs.application}}:latest

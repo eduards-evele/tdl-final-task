@@ -2,7 +2,7 @@ name: 'Deploy'
 description: 'Create deployments and services'
 inputs:
   application:
-    descrption: 'Application for which docker image should be build'
+    description: 'Application for which docker image should be build'
     required: true
   docker_image_tag: 
     description: 'Tag how image should be tagged'

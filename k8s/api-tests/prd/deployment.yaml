@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-tests-prd-deployment
+  labels:
+    app: api-tests-prd
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-tests-prd
+  template:
+    metadata:
+      labels:
+        app: api-tests-prd
+    spec:
+      containers:
+      - name: api-tests-prd
+        image: eduardsevele/api-tests:latest
+      env:
+      - name: ENVIRONMENT
+        value: PRD
+    
