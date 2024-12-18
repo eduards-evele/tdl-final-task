@@ -40,7 +40,7 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
-      - run: echo Deploying node-mock-app-dev
+      - run: echo Performing tests for dev enironment
       - name: Start api-tests-dev
         uses: ./.github/actions/deploy
         with:
@@ -48,13 +48,13 @@ jobs:
             docker_image_tag: eduardsevele/api-tests:latest
             type: dev
   deploy-prd:
-    name: Deployprd version of node-mock-app
+    name: Deploy prd version of node-mock-app
     runs-on: self-hosted
     needs: [build]
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
-      - run: echo Deploying node-mock-app-dev
+      - run: echo Deploying node-mock-app-prd
       - name: Deploy prd
         uses: ./.github/actions/deploy
         with:
@@ -66,7 +66,7 @@ jobs:
     runs-on: self-hosted
     needs: [deploy-prd]
     steps:
-      - run: echo Deploying node-mock-app-dev
+      - run: echo Performing tests for prd environment
       - name: Checkout the code
         uses: actions/checkout@v4
       - name: Start api-tests-dev

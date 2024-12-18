@@ -44,14 +44,17 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
+      - run: echo Deploying node-mock-app-prd
       - run: kubectl set image deployment/api-tests-prd-deployment api-tests-prd=eduardsevele/node-mock-app:${{github.sha}}
+        shell: cmd
       - run: kubectl rollout restart deployment api-tests-prd-deployment
+        shell: cmd
   test-prd:
     name: Start tests for prd
     runs-on: self-hosted
     needs: [deploy-prd]
     steps:
-      - run: echo Deploying node-mock-app-dev
+      - run: echo Performing tests for prd environment
       - name: Checkout the code
         uses: actions/checkout@v4
       - name: Start api-tests-dev
