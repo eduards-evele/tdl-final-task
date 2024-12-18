@@ -34,7 +34,7 @@ paths:
             text/plain:
               schema:
                 type: string
-              example: Hello World!!!!
+              example: Hello World!!!!!
 
     delete:
       summary: Delete a specific message by ID
