@@ -1,4 +1,4 @@
-name: Node mock app pipeline
+name: Node mock app pipeline image replace
 on:
   workflow_dispatch:
 jobs:
@@ -22,7 +22,7 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v4
       - run: kubectl set image deployment/api-tests-dev-deployment api-tests-dev=eduardsevele/node-mock-app:${{github.sha}}
-      - run: kubectl rollout restart 
+      - run: kubectl rollout restart deployment api-tests-dev-deployment
   test-dev:
     name: Start tests for dev
     runs-on: self-hosted
@@ -45,7 +45,7 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v4
       - run: kubectl set image deployment/api-tests-prd-deployment api-tests-prd=eduardsevele/node-mock-app:${{github.sha}}
-      - run: kubectl rollout restart 
+      - run: kubectl rollout restart deployment api-tests-prd-deployment
   test-prd:
     name: Start tests for prd
     runs-on: self-hosted
