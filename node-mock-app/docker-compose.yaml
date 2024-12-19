@@ -1,9 +1,9 @@
 version: '3.8'
 services:
   node-mock-app-dev:
-    image: eduardsevele/api-mock
+    image: eduardsevele/node-mock-app:latest
     build:
-      dockerfile: Dockefile-api-mock
+      dockerfile: Dockerfile
     ports:
       - 3000:3000
     networks:
@@ -18,9 +18,9 @@ services:
         reservations:
           memory: 330M
   node-mock-app-prd:
-    image: eduardsevele/api-mock
+    image: eduardsevele/node-mock-app:latest
     build:
-      dockerfile: Dockerfile-api-mock
+      dockerfile: Dockerfile
     ports:
       - 3001:3000
     networks:

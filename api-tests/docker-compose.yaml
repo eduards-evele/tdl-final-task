@@ -1,9 +1,9 @@
 version: '3.8'
 services:
   api-tests-dev:
-    image: eduardsevele/api-tests
+    image: eduardsevele/api-tests:latest
     build:
-      dockerfile: Dockerfile-api-tests
+      dockerfile: Dockerfile
     environment:
       - ENVIRONMENT=DEV
       - WAIT_HOSTS=node-mock-app-dev:3000
@@ -11,9 +11,9 @@ services:
     networks:  
       - node-app-network
   api-tests-prd:
-    image: eduardsevele/api-tests
+    image: eduardsevele/api-tests:latest
     build:
-      dockerfile: Dockerfile-api-tests
+      dockerfile: Dockerfile
     environment:
       - ENVIRONMENT=PRD
       - WAIT_HOSTS=node-mock-app-prd:3000
