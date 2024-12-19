@@ -19,6 +19,12 @@ jobs:
       with:
           application: node-mock-app
           docker_image_tag: eduardsevele/node-mock-app:${{github.sha}}
+    - if success():
+      run: ./send_notification.sh "Build node mock image" 0
+      shell: pwsh
+    - if failure():
+      run: ./send_notification.sh "Build node mock image" 1
+      shell: pwsh
   deploy-dev:
     name: Deploy dev version of node-mock-app
     runs-on: self-hosted
@@ -33,6 +39,12 @@ jobs:
             application: node-mock-app
             docker_image_tag: eduardsevele/node-mock-app:${{github.sha}}
             type: dev
+      - if success():
+        run: ./send_notification.sh "Deploy dev version of node mock app" 0
+        shell: pwsh
+      - if failure():
+        run: ./send_notification.sh "Deploy dev version of node mock app" 1
+        shell: pwsh
   test-dev:
     name: Start tests for dev
     runs-on: self-hosted
@@ -47,6 +59,12 @@ jobs:
             application: api-tests
             docker_image_tag: eduardsevele/api-tests:latest
             type: dev
+      - if success():
+        run: ./send_notification.sh "Run tests for node mock dev" 0
+        shell: pwsh
+      - if failure():
+        run: ./send_notification.sh "Run tests for node mock dev" 1
+        shell: pwsh
   deploy-prd:
     name: Deploy prd version of node-mock-app
     runs-on: self-hosted
@@ -61,6 +79,12 @@ jobs:
             application: node-mock-app
             docker_image_tag: eduardsevele/node-mock-app:latest
             type: prd
+      - if success():
+        run: ./send_notification.sh "Deploy prd version of node mock app" 0
+        shell: pwsh
+      - if failure():
+        run: ./send_notification.sh "Deploy prd version of node mock app" 0
+        shell: pwsh
   test-prd:
     name: Start tests for prd
     runs-on: self-hosted
@@ -75,5 +99,11 @@ jobs:
             application: api-tests
             docker_image_tag: eduardsevele/api-tests:latest
             type: prd
+      - if success():
+        run: ./send_notification.sh "Run tests for node mock prd" 0
+        shell: pwsh
+      - if failure():
+        run: ./send_notification.sh "Run tests for node mock prd" 1
+        shell: pwsh
         
   
