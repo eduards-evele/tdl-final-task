@@ -11,6 +11,8 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - run: docker login
+      shell: cmd
     - name: Build docker image
       run: docker build -t ${{ inputs.docker_image_tag}} ./${{ inputs.application }}
       shell: cmd
