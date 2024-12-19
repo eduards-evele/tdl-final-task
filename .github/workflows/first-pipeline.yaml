@@ -19,10 +19,10 @@ jobs:
       with:
           application: node-mock-app
           docker_image_tag: eduardsevele/node-mock-app:${{github.sha}}
-    - if ${{success()}}:
+    - if: ${{success()}}
       run: ./send_notification.sh "Build node mock image" 0
       shell: pwsh
-    - if ${{${{failure()}}}}:
+    - if: ${{failure}}
       run: ./send_notification.sh "Build node mock image" 1
       shell: pwsh
   deploy-dev:
@@ -39,10 +39,10 @@ jobs:
             application: node-mock-app
             docker_image_tag: eduardsevele/node-mock-app:${{github.sha}}
             type: dev
-      - if ${{success()}}:
+      - if: ${{success}}
         run: ./send_notification.sh "Deploy dev version of node mock app" 0
         shell: pwsh
-      - if ${{failure()}}:
+      - if: ${{failure}}
         run: ./send_notification.sh "Deploy dev version of node mock app" 1
         shell: pwsh
   test-dev:
@@ -59,10 +59,10 @@ jobs:
             application: api-tests
             docker_image_tag: eduardsevele/api-tests:latest
             type: dev
-      - if ${{success()}}:
+      - if: ${{success}}
         run: ./send_notification.sh "Run tests for node mock dev" 0
         shell: pwsh
-      - if ${{failure()}}:
+      - if: ${{failure}}
         run: ./send_notification.sh "Run tests for node mock dev" 1
         shell: pwsh
   deploy-prd:
@@ -79,10 +79,10 @@ jobs:
             application: node-mock-app
             docker_image_tag: eduardsevele/node-mock-app:latest
             type: prd
-      - if ${{success()}}:
+      - if: ${{success}}
         run: ./send_notification.sh "Deploy prd version of node mock app" 0
         shell: pwsh
-      - if ${{failure()}}:
+      - if: ${{failure}}
         run: ./send_notification.sh "Deploy prd version of node mock app" 0
         shell: pwsh
   test-prd:
@@ -99,10 +99,10 @@ jobs:
             application: api-tests
             docker_image_tag: eduardsevele/api-tests:latest
             type: prd
-      - if ${{success()}}:
+      - if: ${{success}}
         run: ./send_notification.sh "Run tests for node mock prd" 0
         shell: pwsh
-      - if ${{failure()}}:
+      - if: ${{failure}}
         run: ./send_notification.sh "Run tests for node mock prd" 1
         shell: pwsh
         
