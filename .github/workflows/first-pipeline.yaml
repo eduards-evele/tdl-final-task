@@ -22,7 +22,7 @@ jobs:
     - if: ${{success()}}
       run: ./send_notification.sh "Build node mock image" 0
       shell: pwsh
-    - if: ${{failure}}
+    - if: ${{failure()}}
       run: ./send_notification.sh "Build node mock image" 1
       shell: pwsh
   deploy-dev:
